@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "credito"
+name = "chatbot"
 version = "0.1.0"
 description = ""
 authors = ["int-code <pubalibasak.cse2020@nsec.ac.in>"]
@@ -13,7 +13,7 @@ fastapi = "^0.95.0"
 uvicorn = "^0.21.1"
 
 [tool.poetry.scripts]
-test = "credito:chatbot"
+test = "chatbot:chatbot"
 
 [build-system]
 requires = ["poetry-core"]
