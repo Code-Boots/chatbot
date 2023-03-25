@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "credito"
+version = "0.1.0"
+description = ""
+authors = ["int-code <pubalibasak.cse2020@nsec.ac.in>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+openai = "^0.27.2"
+python-dotenv = "^1.0.0"
+
+[tool.poetry.scripts]
+test = "credito:chatbot"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
