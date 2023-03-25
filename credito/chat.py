@@ -1,6 +1,7 @@
 import openai
 import re
 import os
+
 def test():
     return "hello"
 
@@ -8,7 +9,7 @@ class chatbot:
     def __init__(self) -> None:
         openai.api_key=os.getenv("api_key")
         self.questionBank = []
-        self.suggestionQues=['Check my credit score','What is credit score?','What are credit cards?','How to improve my score?','Requirements for getting a credit card?','How to increase credit limit?','']
+        self.suggestionQues=['Check my credit score','What is credit score?','What are credit cards?','How to improve my score?','Requirements for getting a credit card?','How to increase credit limit?']
     def getAns(self,credit_score: int, num_cards: int, question: str) -> str:
         personal_info = openai.ChatCompletion.create(
             model='gpt-3.5-turbo',
@@ -60,9 +61,12 @@ class chatbot:
                 {"role": "user", "content":topic}
             ]
             )
-        return response['choices'][0]['message']['content'].split(", ")
+        return response['choices'][0]['message']['content'].split(",")
     
 if __name__=="__main__":
     bot = chatbot()
     print(bot.getSuggestions("credit score"))
+
+
+
     
