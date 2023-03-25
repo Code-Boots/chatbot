@@ -8,7 +8,7 @@ class chatbot:
     def __init__(self) -> None:
         openai.api_key=os.getenv("api_key")
         self.questionBank = []
-
+        self.suggestionQues=['Check my credit score','What is credit score?','What are credit cards?','How to improve my score?','Requirements for getting a credit card?','How to increase credit limit?','']
     def getAns(self,credit_score: int, num_cards: int, question: str) -> str:
         personal_info = openai.ChatCompletion.create(
             model='gpt-3.5-turbo',
@@ -50,15 +50,19 @@ class chatbot:
             return personal_info
         return response['choices'][0]['message']['content']
 
-    def getSuggestions(topic: str) -> list[str]:
+    def getSuggestions(self, topic: str) -> list[str]:
         response =openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role":"system", "content":"Pick 3 questions from the given list which relate the most to the given topic-\nCheck my credit score\nWhat is credit score?\nWhat are credit cards?\nHow to improve my score?\nRequirements for getting a credit card?\nHow to increase credit limit?"},
+                {"role":"system", "content":"Pick 3 questions from the given list which relate the most to the given topic-\n"+("\n").join(self.suggestionQues)},
                 {"role":"user", "content":"credit card"},
                 {"role":"assistant", "content":"What are credit cards?,Requirements for getting a credit card?,How to increase credit limit?"},
                 {"role": "user", "content":topic}
             ]
             )
         return response['choices'][0]['message']['content'].split(", ")
+    
+if __name__=="__main__":
+    bot = chatbot()
+    print(bot.getSuggestions("credit score"))
     
